@@ -1,5 +1,6 @@
 package com.jam3shalliday.employeemanager.service;
 
+import com.jam3shalliday.employeemanager.exception.UserNotFoundException;
 import com.jam3shalliday.employeemanager.model.Employee;
 import com.jam3shalliday.employeemanager.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,11 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeById(Long id) {
-        return employeeRepo.findEmployeeById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + "not found"));
+        return employeeRepo.findEmployeeById(id)
+                .orElseThrow(() -> new UserNotFoundException("User by id " + id + "not found"));
     }
 
-    public List<Employee> finalAllEmployees() {
+    public List<Employee> findAllEmployees() {
         return employeeRepo.findAll();
     }
 
